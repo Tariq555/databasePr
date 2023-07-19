@@ -1,10 +1,15 @@
-// database.js
+const STORAGE_KEY = 'saved_names';
 
-// This file will handle the database operations
+function saveNameToDatabase(name) {
+  const existingData = localStorage.getItem(STORAGE_KEY);
+  const names = existingData ? JSON.parse(existingData) : [];
+  names.push(name);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(names));
+}
 
-const saveNameToDatabase = (name) => {
-  // Code to save the name to the database
-  // You can implement the database logic here
-};
+function getDatabase() {
+  const existingData = localStorage.getItem(STORAGE_KEY);
+  return existingData ? JSON.parse(existingData) : [];
+}
 
-export default saveNameToDatabase;
+export { saveNameToDatabase, getDatabase };
